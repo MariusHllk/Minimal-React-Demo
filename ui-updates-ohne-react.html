@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UI Updates ohne React</title>
+
+</head>
+<body>
+
+<h1>Shopping without React</h1>
+<input type="text" placeholder="Enter an item" id="item-input"/>
+<button id="add-button">Add</button>
+<button id="send-button">Send</button>
+<script>
+    const items = [];
+    const addButton = document.getElementById("add-button");
+    addButton.addEventListener("click", function() {
+        var node = document.createElement("li");
+        var data = document.getElementById("item-input").value;
+        items.push(data)
+        var textnode = document.createTextNode(data);
+        node.appendChild(textnode);
+        document.body.append(node)
+        document.getElementById("item-input").value = '';
+        document.getElementById("item-input").focus();
+        //... anderer Code in einer großen Anwendung
+        items.pop();
+    })
+    const sendButton = document.getElementById("send-button");
+    sendButton.addEventListener("click", function() {
+        console.log("items to be bought: ", items)
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UI Updates mit React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+<script type="text/babel">
+
+    'use strict';
+    const shoppinglist = React.createElement;
+    const Shoppinglist = () => {
+
+        const [items, setItems] = React.useState([]);
+        const [inputText, setInputText] = React.useState("");
+
+        return (
+            <div>
+                <h1>Shopping with React</h1>
+                <div>
+                    <input
+                        placeholder="Enter an item"
+                        value={inputText}
+                        onChange={(e) => setInputText(e.target.value)}
+                        id="item-input"
+                    />
+                    <button
+                        onClick={() => {
+                            setItems(prevItems => {
+                                return [...prevItems, inputText];
+                            });
+                            setInputText("");
+                            document.getElementById("item-input").focus();
+                        }}
+                    >Add
+                    </button>
+                    <button
+                        onClick={() => {
+                            console.log("items to be bought: ", items)
+                        }}
+                    >Send
+                    </button>
+                </div>
+                <ul>
+                    {items.map(item => (
+                        <li key={item}>{item}</li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
+
+    const rootElement = document.querySelector('#root');
+    ReactDOM.render(shoppinglist(Shoppinglist), rootElement);
+
+</script>
+
+</body>
+
+</html>
